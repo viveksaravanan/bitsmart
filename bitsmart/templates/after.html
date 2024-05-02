@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>BitSmart App</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <h1 class="header center orange-text">BitSmart</h1>
+      <br><br>
+
+    </div>
+  </div>
+
+  <form id="prediction-form" action='/predict' method="post">
+    <div class="container">
+      <input type="text" class="datepicker" name="datepicker" id="datepicker">
+    </div>
+
+    <div class="row center">
+      <button type="submit" class="btn-large waves-effect waves-light orange">Predict</button>
+    </div>
+
+  </form>
+  <br><br><br>
+
+  <div id="prediction-container">
+    <div class="row center">
+      <h5 class="header col s12 light">You have selected today as {{ date }}. Bitsmart has made the following predictions.</h5>
+    </div>
+  
+    <div class="container">
+      <div class="row center">
+        <h4 class="header col s12 light">Predicted prices (in USD) for the next seven days are:</h4>
+      </div>
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Highest Price</th>
+            <th>Lowest Price</th>
+            <th>Average Closing Price</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr>
+            <td>{{ max_high }}</td>
+            <td>{{ min_low }}</td>
+            <td>{{ avg_close }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+  
+    <div class="container">
+      <div class="row center">
+        <h4 class="header col s12 light">Recommended swing trading strategy:</h4>
+      </div>
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Sell All</th>
+            <th>All In</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr>
+            <td>TBD</td>
+            <td>TBD</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+  <br><br><br><br>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">BitSmart</h5>
+          <p class="grey-text text-lighten-4">We are a team of 4 students working on our term project for CMPE 257: Machine Learning in Spring 2024.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Group Members</h5>
+          <ul>
+            <li class="white-text">Vivek Saravanan</li>
+            <li class="white-text"> Sean Finney</li>
+            <li class="white-text"> Sharan Patil</li>
+            <li class="white-text"> Brian Ho</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.js"></script>
+  <script src="static/js/init.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.datepicker');
+      var options = {
+        format: 'mm/dd/yyyy', 
+        defaultDate: new Date(2024, 3, 30),
+        minDate: new Date(2023, 4, 27), 
+        maxDate: new Date(2024, 4, 26) 
+      };
+      var instances = M.Datepicker.init(elems,options);
+    });
+  </script>
+
+  </body>
+</html>
