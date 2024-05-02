@@ -7,7 +7,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
-df = pd.read_csv("training_data_1.csv")
+df = pd.read_csv("bitsmart/training_data_1.csv")
 
 X = df.drop(columns=['Date','BTC-High', 'BTC-Low', 'BTC-Close'])
 y = df[['BTC-High', 'BTC-Low', 'BTC-Close']]

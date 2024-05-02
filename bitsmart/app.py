@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'secretkey'
 
 rf_regressor = pickle.load(open('model.pkl', 'rb'))
-df = pd.read_csv("training_data_1.csv")
+df = pd.read_csv("bitsmart/training_data_1.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
 @app.route('/')
