@@ -59,7 +59,35 @@ def predict():
     min_low = int(np.round(min(low_prices)))
     avg_close = int(np.round(sum(close_prices)/len(close_prices)))
 
-    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close)
+    #currently just based off of the close prices
+    dates = maxProfit(close_prices)
+    print(close_prices)
+    sell_date = dates[0]
+    buy_date = dates[1]
+
+    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_date=sell_date, buy_date=buy_date)
+
+#should maybe take in high and low prices for the days as well to compare. Will need tweaking.
+#needs work, April 15th is totally off, sells at the lowest, buys at the highest. Need a better strategy
+def maxProfit(prices):
+        profit = 0
+        sell = prices[0]
+        result = []
+        sell_i = 0
+        i = 0
+        r = []
+        for buy in prices[1:]:
+            i += 1
+            if sell > buy:
+                profit = max(profit, sell - buy)
+                result.append([profit, sell_i, i])
+            else:
+                sell = buy
+                sell_i += 1
+        for item in result:
+            if item[0] == profit:
+                r = [item[1], item[2]]
+        return r
 
 if __name__ == "__main__":
     app.run(debug=True)
