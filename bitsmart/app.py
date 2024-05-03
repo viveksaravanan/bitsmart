@@ -59,7 +59,13 @@ def predict():
     min_low = int(np.round(min(low_prices)))
     avg_close = int(np.round(sum(close_prices)/len(close_prices)))
 
-    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close)
+    #Swing Trading Strategy
+
+    sell_all = 'TBD'
+    all_in = 'TBD'
+    
+
+    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_all=sell_all, all_in=all_in)
 
 if __name__ == "__main__":
     app.run(debug=True)
