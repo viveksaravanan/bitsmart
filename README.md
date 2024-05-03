@@ -11,7 +11,7 @@
 3. Sharan Patil: 
 - sharanbasavaraj.patil@sjsu.edu
 
-4. Brian Ho: 
+4. Brian Ho: 010631517
 - brian.d.ho@sjsu.edu
 
 ## URL

@@ -75,8 +75,8 @@
   
         <tbody>
           <tr>
-            <td>{{ sell_date }}</td>
-            <td>{{ buy_date }}</td>
+            <td>{{ sell_all }}</td>
+            <td>{{ all_in }}</td>
           </tr>
         </tbody>
       </table>
@@ -120,8 +120,8 @@
       var options = {
         format: 'mm/dd/yyyy', 
         defaultDate: new Date(2024, 3, 30),
-        minDate: new Date(2023, 4, 27), 
-        maxDate: new Date(2024, 4, 26) 
+        minDate: new Date(2023, 3, 27), 
+        maxDate: new Date(2024, 3, 26) 
       };
       var instances = M.Datepicker.init(elems,options);
     });

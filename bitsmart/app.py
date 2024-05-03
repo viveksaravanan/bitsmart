@@ -63,9 +63,9 @@ def predict():
     dates = maxProfit(close_prices)
     print(close_prices)
     sell_date = dates[0]
-    buy_date = dates[1]
+    all_in = dates[1]
 
-    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_date=sell_date, buy_date=buy_date)
+    return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_date=sell_date, all_in=all_in)
 
 #should maybe take in high and low prices for the days as well to compare. Will need tweaking.
 #needs work, April 15th is totally off, sells at the lowest, buys at the highest. Need a better strategy
