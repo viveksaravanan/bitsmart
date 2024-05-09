@@ -49,7 +49,7 @@ def predict():
             input_date += dt.timedelta(days=1)
             predictions.append(prediction)
     
-    input_date = form_date
+    input_date = pd.to_datetime(form_date)
 
     high_prices = [float(arr[0]) for arr in predictions]
     low_prices = [float(arr[1]) for arr in predictions]
@@ -62,8 +62,10 @@ def predict():
     #currently just based off of the close prices
     dates = maxProfit(close_prices)
     print(close_prices)
-    sell_all = dates[0]
-    all_in = dates[1]
+    sell = input_date + dt.timedelta(days=dates[0])
+    buy = input_date + dt.timedelta(days=dates[1])
+    sell_all = sell.strftime("%m-%d-%Y")
+    all_in = buy.strftime("%m-%d-%Y")
 
     return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_all=sell_all, all_in=all_in)
 
