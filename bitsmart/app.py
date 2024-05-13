@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 app.secret_key = 'secretkey'
 
-rf_regressor = pickle.load(open('model.pkl', 'rb'))
+rf_regressor = pickle.load(open('bitsmart/model.pkl', 'rb'))
 
 df = pd.read_csv("bitsmart/data/training_data_3.csv")
 df['Date'] = pd.to_datetime(df['Date'])
