@@ -27,7 +27,7 @@ def predict():
 
     input_date = pd.to_datetime(form_date)
 
-    subset = df[df['Date'].between(input_date, input_date + pd.Timedelta(days=6))].drop(columns=['Date','BTC-High', 'BTC-Low', 'BTC-Close'])
+    subset = df[df['Date'].between(input_date, input_date + pd.Timedelta(days=7))].drop(columns=['Date','BTC-High', 'BTC-Low', 'BTC-Close'])
 
     predictions = []
     days_in_data = len(subset)
@@ -38,8 +38,8 @@ def predict():
         prediction = np.append(prediction, input_date.strftime('%m/%d/%Y'))
         input_date += dt.timedelta(days=1)
         predictions.append(prediction)
-    if days_in_data < 7:
-        for i in range(7 - days_in_data):
+    if days_in_data < 8:
+        for i in range(8 - days_in_data):
             X_row[0][0] = predictions[-1][-2]
             X_row[0][-1] = input_date.year
             X_row[0][-2] = input_date.day
@@ -49,6 +49,7 @@ def predict():
             input_date += dt.timedelta(days=1)
             predictions.append(prediction)
     
+    predictions = predictions[1:]
     input_date = pd.to_datetime(form_date)
 
     high_prices = [float(arr[0]) for arr in predictions]
@@ -62,10 +63,10 @@ def predict():
     #currently just based off of the close prices
     dates = maxProfit(close_prices)
     print(close_prices)
-    sell = input_date + dt.timedelta(days=dates[0])
-    buy = input_date + dt.timedelta(days=dates[1])
-    sell_all = sell.strftime("%m-%d-%Y")
-    all_in = buy.strftime("%m-%d-%Y")
+    sell = input_date + dt.timedelta(days=dates[0]) + dt.timedelta(days=1)
+    buy = input_date + dt.timedelta(days=dates[1]) + dt.timedelta(days=1)
+    sell_all = sell.strftime("%m/%d/%Y")
+    all_in = buy.strftime("%m/%d/%Y")
 
     return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_all=sell_all, all_in=all_in)
 
