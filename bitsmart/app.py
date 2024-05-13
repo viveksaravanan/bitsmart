@@ -11,8 +11,16 @@ app = Flask(__name__)
 app.secret_key = 'secretkey'
 
 rf_regressor = pickle.load(open('model.pkl', 'rb'))
-df = pd.read_csv("bitsmart/training_data_1.csv")
+
+df = pd.read_csv("bitsmart/data/training_data_3.csv")
 df['Date'] = pd.to_datetime(df['Date'])
+df['Month'] = df['Date'].dt.month
+df['Day'] = df['Date'].dt.day
+df['Year'] = df['Date'].dt.year
+df.replace(',', '', regex=True, inplace=True)
+
+for col in df.columns[1:]:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
 
 @app.route('/')
 def main():
