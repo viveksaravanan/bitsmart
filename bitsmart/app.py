@@ -68,18 +68,27 @@ def predict():
     min_low = int(np.round(min(low_prices)))
     avg_close = int(np.round(sum(close_prices)/len(close_prices)))
 
-    #currently just based off of the close prices
     dates = maxProfit(close_prices)
     print(close_prices)
-    sell = input_date + dt.timedelta(days=dates[0])
-    buy = input_date + dt.timedelta(days=dates[1])
-    sell_all = sell.strftime("%m/%d/%Y")
-    all_in = buy.strftime("%m/%d/%Y")
+    if dates == []:
+        # if prices just rise, we won't find a max profit
+        # no reason to sell or buy
+        sell_all = "N/A"
+        all_in = "N/A"
+    else:
+        sell = input_date + dt.timedelta(days=dates[0])
+        buy = input_date + dt.timedelta(days=dates[1])
+        sell_all = sell.strftime("%m/%d/%Y")
+        if dates[1] == 6:
+            # if prices only fall, max profit comes from buying at the end
+            # don't need to buy at all in that case
+            all_in = "N/A"
+        else:
+            all_in = buy.strftime("%m/%d/%Y")
 
     return render_template('after.html', date=form_date, max_high=max_high, min_low=min_low, avg_close=avg_close, sell_all=sell_all, all_in=all_in)
 
-#should maybe take in high and low prices for the days as well to compare. Will need tweaking.
-#needs work, April 15th is totally off, sells at the lowest, buys at the highest. Need a better strategy
+# swing trading code
 def maxProfit(prices):
         profit = 0
         sell = prices[0]

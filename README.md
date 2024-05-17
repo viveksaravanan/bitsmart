@@ -5,7 +5,7 @@
 1. Vivek Saravanan: 017553224
 - vivek.saravanan@sjsu.edu
 
-2. Sean Finney: 
+2. Sean Finney: 015961075
 - sean.finney@sjsu.edu
 
 3. Sharan Patil: 
