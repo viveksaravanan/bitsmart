@@ -12,7 +12,7 @@ app.secret_key = 'secretkey'
 
 rf_regressor = pickle.load(open('bitsmart/model.pkl', 'rb'))
 
-df = pd.read_csv("bitsmart/data/training_data_3.csv")
+df = pd.read_csv("bitsmart/data/training_data_4.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 df['Month'] = df['Date'].dt.month
 df['Day'] = df['Date'].dt.day
@@ -33,7 +33,7 @@ def predict():
         flash('Please select a date.')
         return render_template('index.html')
 
-    input_date = pd.to_datetime(form_date) + dt.timedelta(days=1)
+    input_date = pd.to_datetime(form_date)
 
     subset = df[df['Date'].between(input_date, input_date + pd.Timedelta(days=7))].drop(columns=['Date','BTC-High', 'BTC-Low', 'BTC-Close'])
 
@@ -58,7 +58,7 @@ def predict():
             predictions.append(prediction)
     
     predictions = predictions[1:]
-    input_date = pd.to_datetime(form_date)
+    input_date = pd.to_datetime(form_date) + dt.timedelta(days=1)
 
     high_prices = [float(arr[0]) for arr in predictions]
     low_prices = [float(arr[1]) for arr in predictions]

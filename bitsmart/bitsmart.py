@@ -7,7 +7,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
-df = pd.read_csv("bitsmart/data/training_data_3.csv")
+df = pd.read_csv("bitsmart/data/training_data_4.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 df['Month'] = df['Date'].dt.month
 df['Day'] = df['Date'].dt.day
@@ -22,7 +22,7 @@ y = df[['BTC-High', 'BTC-Low', 'BTC-Close']]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
-rf_regressor = RandomForestRegressor(n_estimators=200, max_depth = 15, random_state=42)
+rf_regressor = RandomForestRegressor(max_depth=90, min_samples_leaf=2, n_estimators=2000)
 
 rf_regressor.fit(X_train, y_train)
 
